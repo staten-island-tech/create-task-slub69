@@ -11,24 +11,24 @@ converstions = { 'A':'.-', 'B':'-...', 'C':'-.-.', 'D':'-..', 'E':'.',
 def encrypt(message):
     cipher = ''
     for letter in message:
-        if letter != ' ': 
+        if letter != ' ': # Looks up the dictionary and adds the correspponding morse code and a space to separate morse code
             cipher += converstions[letter] + ' '
-        else:
-            cipher += ' ' 
+        else:# 1 space indicates different characters
+            cipher += ' ' # 2 indicates different words
     return cipher
 def decrypt(message):
-    message += ' '   
-    decipher = ''    
+    message += ' '    # extra space added at the end to access the last morse code letter
+    decipher = ''    #set empty decipher value
     citext = ''
     for letter in message:
-        if letter != ' ':
-            i = 0 
-            citext += letter 
-        else:
-            i += 1
-            if i == 2:
-                decipher += ' '
-            else:
+        if letter != ' ': # check for space
+            i = 0 # counter to keep track of spaces
+            citext += letter # storing morse code of a single character
+        else:# in case of space 
+            i += 1# 1 space indicates different characters
+            if i == 2:# 2 indicates different words
+                decipher += ' '# adding space to separate words
+            else:# accessing the keys using their values
                 decipher += list(converstions.keys())[list(converstions.values()).index(citext)]
                 citext = ''
     return decipher
@@ -46,7 +46,7 @@ def main():
     print(decrypt(message.upper()) + '\n')
   else:
     return main()
-while 1: 
+while 1: #create the main loop that the code will run
   main()
   again = input('Would you like to continue the program? Y/N\n')
   if again in 'Yy':
